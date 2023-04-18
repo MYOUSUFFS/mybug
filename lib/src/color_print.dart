@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
 
 class ColorPrint {
@@ -8,12 +7,17 @@ class ColorPrint {
     return colorValue;
   }
 
-  void colorPrint(String printStatement, Color hexCode) {
+  void print(String printStatement, Color hexCode) {
     debugPrint('${colorToAnsi(hexCode)} $printStatement \x1B[0m');
   }
-   colorPrintHex(String printStatement, String hexCode){
-     Color color = Color(int.parse(hexCode.substring(1), radix: 16));
+
+  String colorToAnsiHex(String hexCode) {
+    Color color = Color(int.parse(hexCode.substring(1), radix: 16));
     final colorValue = '\x1B[38;2;${color.red};${color.green};${color.blue}m';
     return colorValue;
+  }
+
+  void printHex(String printStatement, String hexCode) {
+    debugPrint('${colorToAnsiHex(hexCode)} $printStatement \x1B[0m');
   }
 }
